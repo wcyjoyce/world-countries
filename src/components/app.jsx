@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Game from "./game.jsx";
+import List from "./list.jsx";
 import countries from "./countries.js";
 
 class App extends Component {
@@ -12,7 +13,12 @@ class App extends Component {
 
   handleSubmit = (event) => {
     if (event.key === "Enter") {
-      console.log(event.target.value);
+      if (this.state.countries.find(country => country["name"] === this.state.input || country["other"] === this.state.input)) {
+        if (!this.state.correct.includes(this.state.input)) {
+          this.state.correct.push(this.state.input);
+        };
+      };
+      this.setState({ input: "" });
     };
   };
 
@@ -21,6 +27,7 @@ class App extends Component {
       <div className="app">
         <h1>World Countries</h1>
         <Game countries={countries} handleChange={this.handleChange} handleSubmit={this.handleSubmit} correct={this.state.correct} input={this.state.input} />
+        <List countries={countries} correct={this.state.correct} />
       </div>
     );
   };
