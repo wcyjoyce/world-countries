@@ -2,10 +2,29 @@ import React, { Component } from "react";
 
 class List extends Component {
   render() {
+    const regions = this.props.countries.map(country => country["region"]);
+    const regionList = [...new Set(regions)];
+
+    let regionTable = [];
+    regionList.forEach(region => {
+      const regionName = this.props.countries.filter(country => country["region"] === region);
+      regionTable.push({ region, regionName });
+    });
+
     return (
       <div className="list">
-        {this.props.correct.map((country, index) => {
-          return <li key={index}>{country}</li>
+
+        {regionTable.map(region => {
+          return (
+            <table key={region.region}>
+              <thead><tr><th>{region.region} ({region.regionName.length})</th></tr></thead>
+              <tbody>
+                {region.regionName.map((r,i) => {
+                  return <tr key={i}><td>{r["name"]}</td></tr>
+                })}
+              </tbody>
+            </table>
+          );
         })}
       </div>
     );
