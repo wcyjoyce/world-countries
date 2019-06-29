@@ -7,6 +7,18 @@ import React, { Component } from "react";
 class Game extends Component {
   state = { started: false };
 
+  renderButton = () => {
+    if (this.props.time > 0) {
+      if (this.state.started) {
+        return <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
+      } else {
+        return <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
+      };
+    } else {
+      return <button className="btn btn-danger" onClick={this.props.resetGame}>Reset Game</button>
+    };
+  };
+
   formatTime = (time) => {
     let seconds = ("0" + time % 60).slice(-2);
     let minutes = Math.floor(time / 60);
@@ -60,18 +72,10 @@ class Game extends Component {
     };
   };
 
-  renderDisplay = () => {
-    return this.state.started || this.props.time > 0 ? { display: "none" } : { display: "inline-block" };
-  };
-
   render() {
     return (
       <div className="game">
-        <div className="buttons">
-          <button className="btn btn-info" disabled={this.state.started} onClick={this.startGame}>Start Game</button>
-          <button className="btn btn-info" disabled={!this.state.started} onClick={this.stopGame}>Stop Game</button>
-          <button className="btn btn-danger" style={this.renderDisplay()} onClick={this.props.resetGame}>Reset Game</button>
-        </div>
+        <div className="buttons">{this.renderButton()}</div>
         <div>Time: {this.formatTime(this.props.time)}</div>
         <div>{this.props.correct.length}/{this.props.countries.length} guessed</div>
         <div className="input">
