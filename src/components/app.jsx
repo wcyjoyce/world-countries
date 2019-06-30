@@ -33,7 +33,14 @@ class App extends Component {
     this.setState({ correct: [], time: 5 });
   };
 
+  giveUp = () => {
+    this.setState({ started: false, time: 0 });
+    clearInterval(this.timer);
+  };
+
   render() {
+    console.log(this.state)
+
     return (
       <div className="app">
         <h1>World Countries</h1>
@@ -46,6 +53,7 @@ class App extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           updateTime={this.updateTime}
+          giveUp={this.giveUp}
           resetGame={this.resetGame}
         />
         <List countries={countries} correct={this.state.correct} time={this.state.time} />

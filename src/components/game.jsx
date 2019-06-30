@@ -10,7 +10,12 @@ class Game extends Component {
   renderButton = () => {
     if (this.props.time > 0) {
       if (this.state.started) {
-        return <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
+        return (
+          <div>
+          <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
+          <button className="btn btn-info" onClick={this.props.giveUp}>Give Up</button>
+          </div>
+        );
       } else {
         return <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
       };
