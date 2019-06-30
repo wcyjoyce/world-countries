@@ -144,7 +144,7 @@ const countries = [
   { region: "africa", name: "south africa" },
   { region: "africa", name: "south sudan" },
   { region: "africa", name: "sudan" },
-  { region: "africa", name: "swaziland" },
+  { region: "africa", name: "swaziland", other: "eswatini" },
   { region: "africa", name: "tanzania" },
   { region: "africa", name: "togo" },
   { region: "africa", name: "tunisia" },
