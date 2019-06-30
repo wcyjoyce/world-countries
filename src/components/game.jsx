@@ -12,12 +12,21 @@ class Game extends Component {
       if (this.state.started) {
         return (
           <div>
-          <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
-          <button className="btn btn-info" onClick={this.props.giveUp}>Give Up</button>
+            <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
+            <button className="btn btn-info" onClick={this.props.giveUp}>Give Up</button>
+            <div className="input">
+              <label>Enter country's name</label>
+              <input disabled={!this.state.started} type="text" onChange={this.props.handleChange} onKeyDown={this.props.handleSubmit} value={this.props.input} />
+              <span className="message">{this.props.message}</span>
+            </div>
           </div>
         );
       } else {
-        return <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
+        return (
+          <div>
+            <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
+          </div>
+        )
       };
     } else {
       return <button className="btn btn-danger" onClick={this.props.resetGame}>Reset Game</button>
@@ -83,11 +92,6 @@ class Game extends Component {
         <div className="buttons">{this.renderButton()}</div>
         <div>Time: {this.formatTime(this.props.time)}</div>
         <div>{this.props.correct.length}/{this.props.countries.length} guessed</div>
-        <div className="input">
-          <label>Enter country's name</label>
-          <input disabled={!this.state.started} type="text" onChange={this.props.handleChange} onKeyDown={this.props.handleSubmit} value={this.props.input} />
-          <span className="message">{this.props.message}</span>
-        </div>
       </div>
     );
   };
