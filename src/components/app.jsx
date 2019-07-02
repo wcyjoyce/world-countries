@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Game from "./game.jsx";
 import List from "./list.jsx";
+import Summary from "./summary.jsx";
 import countries from "./countries.js";
 
 class App extends Component {
@@ -39,23 +40,25 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state)
-
     return (
       <div className="app">
         <h1>World Countries</h1>
-        <Game
-          countries={countries}
-          correct={this.state.correct}
-          input={this.state.input}
-          message={this.state.message}
-          time={this.state.time}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          updateTime={this.updateTime}
-          giveUp={this.giveUp}
-          resetGame={this.resetGame}
-        />
+        {this.state.time > 0 ?
+          <Game
+            countries={countries}
+            correct={this.state.correct}
+            input={this.state.input}
+            message={this.state.message}
+            time={this.state.time}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            updateTime={this.updateTime}
+            giveUp={this.giveUp}
+            resetGame={this.resetGame}
+          />
+        :
+          <Summary correct={this.state.correct} countries={this.state.countries} resetGame={this.resetGame} />
+        }
         <List countries={countries} correct={this.state.correct} time={this.state.time} />
       </div>
     );
