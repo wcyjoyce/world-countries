@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // TODO:
 // 1) setInterval speeds up when resuming game
-// 2) render buttons dynamically
+// 2) render summary
 
 class Game extends Component {
   state = { started: false };
@@ -12,24 +12,38 @@ class Game extends Component {
       if (this.state.started) {
         return (
           <div>
-            <button className="btn btn-info" onClick={this.stopGame}>Stop Game</button>
+            <button className="btn btn-info" onClick={this.stopGame}>Pause Game</button>
             <button className="btn btn-info" onClick={this.props.giveUp}>Give Up</button>
             <div className="input">
               <label>Enter country's name</label>
               <input disabled={!this.state.started} type="text" onChange={this.props.handleChange} onKeyDown={this.props.handleSubmit} value={this.props.input} />
               <span className="message">{this.props.message}</span>
+              <div>{this.props.correct.length}/{this.props.countries.length} guessed</div>
             </div>
           </div>
         );
       } else {
-        return (
-          <div>
-            <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
-          </div>
-        )
+        if (this.props.time < 5) {
+          return (
+            <div>
+              <button className="btn btn-info" onClick={this.startGame}>Resume Game</button>
+              <button className="btn btn-info" onClick={this.props.giveUp}>Give Up</button>
+            </div>
+          );
+        } else {
+          return (
+            <div>
+              <button className="btn btn-info" onClick={this.startGame}>Start Game</button>
+            </div>
+          );
+        };
       };
     } else {
-      return <button className="btn btn-danger" onClick={this.props.resetGame}>Reset Game</button>
+      return (
+        <div>
+          <button className="btn btn-danger" onClick={this.props.resetGame}>Reset Game</button>
+        </div>
+      );
     };
   };
 
@@ -63,35 +77,11 @@ class Game extends Component {
     clearInterval(this.timer);
   };
 
-  // not used yet
-  gameCompleted = () => {
-    if (this.props.correct.length === this.props.countries.length) {
-      this.setState({ started: false });
-      this.endTime = new Date().getTime();
-      this.timeTaken = (this.startTime - this.endTime) / 1000; // expressed in seconds
-
-      return (
-        <div className="completed"><h1>Congratulations!</h1></div>
-      );
-    };
-  };
-
-  // not used yet
-  renderSummary = () => {
-    if (this.props.time < 0) {
-      console.log('ended!')
-      return (
-        <div className="summary"><h1>Summary</h1></div>
-      );
-    };
-  };
-
   render() {
     return (
       <div className="game">
-        <div className="buttons">{this.renderButton()}</div>
         <div>Time: {this.formatTime(this.props.time)}</div>
-        <div>{this.props.correct.length}/{this.props.countries.length} guessed</div>
+        <div className="buttons">{this.renderButton()}</div>
       </div>
     );
   };
