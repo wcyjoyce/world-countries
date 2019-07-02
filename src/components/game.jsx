@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
 // TODO:
-// 1) setInterval speeds up when resuming game
-// 2) render summary
+// 1) render summary
 
 class Game extends Component {
   state = { started: false };
@@ -60,7 +59,7 @@ class Game extends Component {
         this.props.updateTime();
       } else {
         this.setState({ started: false, input: "" });
-        clearInterval(this.timer);
+        this.timer = clearInterval(this.timer);
         console.log("time's up"); // placeholder check
       };
     };
@@ -74,7 +73,7 @@ class Game extends Component {
 
   stopGame = () => {
     this.setState({ started: false });
-    clearInterval(this.timer);
+    this.timer = clearInterval(this.timer);
   };
 
   render() {
