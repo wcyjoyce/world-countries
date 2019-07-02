@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-// TODO:
-// 1) render summary
+import Summary from "./summary.jsx";
 
 class Game extends Component {
   state = { started: false };
@@ -81,6 +80,13 @@ class Game extends Component {
       <div className="game">
         <div>Time: {this.formatTime(this.props.time)}</div>
         <div className="buttons">{this.renderButton()}</div>
+
+      <Summary
+        correct={this.props.correct}
+        countries={this.props.countries}
+        resetGame={this.props.resetGame}
+        formatTime={this.formatTime}
+      />
       </div>
     );
   };
