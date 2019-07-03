@@ -5,7 +5,7 @@ import List from "./list.jsx";
 import countries from "./countries.js";
 
 class App extends Component {
-  state = { correct: [], countries: countries, input: "", time: 5, message: "" };
+  state = { correct: [], countries: countries, input: "", time: 900, message: "" };
 
   handleChange = (event) => {
     this.setState({ input: event.target.value });
@@ -17,6 +17,7 @@ class App extends Component {
         if (!this.state.correct.includes(this.state.input)) {
           var answer = this.state.countries.filter(country => country["name"] === this.state.input || country["other"] === this.state.input);
           this.state.correct.push(answer[0]["name"]);
+          this.setState({ message: "" });
         } else {
           this.setState({ message: `Already guessed! (${this.state.input})` })
         };
@@ -30,7 +31,7 @@ class App extends Component {
   };
 
   resetGame = () => {
-    this.setState({ correct: [], time: 5 });
+    this.setState({ correct: [], time: 900 });
     clearInterval(this.timer);
   };
 
@@ -44,7 +45,7 @@ class App extends Component {
       <div className="app">
         <h1>World Countries</h1>
         <Game
-          countries={countries}
+          countries={this.state.countries}
           correct={this.state.correct}
           input={this.state.input}
           message={this.state.message}
@@ -55,7 +56,7 @@ class App extends Component {
           giveUp={this.giveUp}
           resetGame={this.resetGame}
         />
-        <List countries={countries} correct={this.state.correct} time={this.state.time} />
+        <List countries={this.state.countries} correct={this.state.correct} time={this.state.time} />
       </div>
     );
   };
