@@ -21,7 +21,7 @@ class Game extends Component {
           </div>
         );
       } else {
-        if (this.props.time < 5) {
+        if (this.props.time < 900) {
           return (
             <div>
               <button className="btn btn-info" onClick={this.startGame}>Resume Game</button>
@@ -45,7 +45,7 @@ class Game extends Component {
     };
   };
 
-  formatTime = (time) => {
+  formatTime = time => {
     let seconds = ("0" + time % 60).slice(-2);
     let minutes = Math.floor(time / 60);
     minutes = seconds === 59 ? minutes - 1 : minutes;
@@ -66,7 +66,6 @@ class Game extends Component {
 
   startGame = () => {
     this.setState({ started: true })
-    this.startTime = new Date().getTime();
     setInterval(this.timer, 1000); // 1-second intervals
   };
 
@@ -75,21 +74,48 @@ class Game extends Component {
     this.timer = clearInterval(this.timer);
   };
 
-  render() {
-    return (
-      <div className="game">
-        <div>Time: {this.formatTime(this.props.time)}</div>
-        <div className="buttons">{this.renderButton()}</div>
+  // render() {
+  //   if (this.props.time < 0 || this.props.correct.length === this.props.countries.length) {
+  //     return (
+  //       <Summary
+  //         correct={this.props.correct}
+  //         countries={this.props.countries}
+  //         resetGame={this.props.resetGame}
+  //         time={this.props.time}
+  //         formatTime={this.formatTime}
+  //       />
+  //     );
+  //   } else {
+  //     return (
+  //       <div className="game">
+  //         <div>Time: {this.formatTime(this.props.time)}</div>
+  //         <div className="buttons">{this.renderButton()}</div>
+  //       </div>
+  //     );
+  //   };
+  // };
 
+  render() {
+    // if (this.props.time < 0) {
+    return (
+      <div>
       <Summary
         correct={this.props.correct}
         countries={this.props.countries}
         resetGame={this.props.resetGame}
+        time={this.props.time}
         formatTime={this.formatTime}
       />
+
+      <div className="game">
+        <div>Time: {this.formatTime(this.props.time)}</div>
+        <div className="buttons">{this.renderButton()}</div>
       </div>
-    );
-  };
+
+      </div>
+    )
+    // }
+  }
 };
 
 export default Game;
