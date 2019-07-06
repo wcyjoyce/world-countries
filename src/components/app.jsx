@@ -5,13 +5,13 @@ import List from "./list.jsx";
 import countries from "./countries.js";
 
 class App extends Component {
-  state = { correct: [], countries: countries, input: "", time: 900, message: "" };
+  state = { correct: [], countries: countries, input: "", time: 900, message: "" }; // 15 minutes
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ input: event.target.value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     if (event.key === "Enter") {
       if (this.state.countries.find(country => country["name"] === this.state.input || country["other"] === this.state.input)) {
         if (!this.state.correct.includes(this.state.input)) {
@@ -21,6 +21,8 @@ class App extends Component {
         } else {
           this.setState({ message: `Already guessed! (${this.state.input})` })
         };
+      } else {
+        this.setState({ message: "Incorrect answer" });
       };
       this.setState({ input: "" });
     };
@@ -56,7 +58,11 @@ class App extends Component {
           giveUp={this.giveUp}
           resetGame={this.resetGame}
         />
-        <List countries={this.state.countries} correct={this.state.correct} time={this.state.time} />
+        <List
+          countries={this.state.countries}
+          correct={this.state.correct}
+          time={this.state.time}
+        />
       </div>
     );
   };
