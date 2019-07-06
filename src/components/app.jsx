@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Game from "./game.jsx";
 import List from "./list.jsx";
-import countries from "./countries.js";
+import countries from "./data/countries.js";
 
 class App extends Component {
   state = { correct: [], countries: countries, input: "", time: 900, message: "" }; // 15 minutes
