@@ -45,6 +45,19 @@ class Game extends Component {
     };
   };
 
+  renderInput = () => {
+    if (this.props.time > 0) {
+      if (this.props.correct.length !== this.props.countries.length) {
+        return (
+          <div className="game">
+            <div>Time: {this.formatTime(this.props.time)}</div>
+            <div className="buttons">{this.renderButton()}</div>
+          </div>
+        );
+      };
+    };
+  };
+
   formatTime = time => {
     let seconds = ("0" + time % 60).slice(-2);
     let minutes = Math.floor(time / 60);
@@ -55,11 +68,15 @@ class Game extends Component {
   timer = () => {
     if (this.state.started) {
       if (this.props.time > 0) {
-        this.props.updateTime();
+        if (this.props.correct.length !== this.props.countries.length) {
+          this.props.updateTime();
+        } else {
+          this.timer = clearInterval(this.timer);
+          this.setState({ started: false });
+        };
       } else {
         this.setState({ started: false, input: "" });
         this.timer = clearInterval(this.timer);
-        console.log("time's up"); // placeholder check
       };
     };
   };
@@ -74,48 +91,20 @@ class Game extends Component {
     this.timer = clearInterval(this.timer);
   };
 
-  // render() {
-  //   if (this.props.time < 0 || this.props.correct.length === this.props.countries.length) {
-  //     return (
-  //       <Summary
-  //         correct={this.props.correct}
-  //         countries={this.props.countries}
-  //         resetGame={this.props.resetGame}
-  //         time={this.props.time}
-  //         formatTime={this.formatTime}
-  //       />
-  //     );
-  //   } else {
-  //     return (
-  //       <div className="game">
-  //         <div>Time: {this.formatTime(this.props.time)}</div>
-  //         <div className="buttons">{this.renderButton()}</div>
-  //       </div>
-  //     );
-  //   };
-  // };
-
   render() {
-    // if (this.props.time < 0) {
     return (
       <div>
-      <Summary
-        correct={this.props.correct}
-        countries={this.props.countries}
-        resetGame={this.props.resetGame}
-        time={this.props.time}
-        formatTime={this.formatTime}
-      />
-
-      <div className="game">
-        <div>Time: {this.formatTime(this.props.time)}</div>
-        <div className="buttons">{this.renderButton()}</div>
+        <Summary
+          correct={this.props.correct}
+          countries={this.props.countries}
+          resetGame={this.props.resetGame}
+          time={this.props.time}
+          formatTime={this.formatTime}
+        />
+        {this.renderInput()}
       </div>
-
-      </div>
-    )
-    // }
-  }
+    );
+  };
 };
 
 export default Game;
