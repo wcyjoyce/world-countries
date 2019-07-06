@@ -11,7 +11,7 @@ const countries = [
   { region: "europe", name: "czech republic", other: "czech", stats: 61 },
   { region: "europe", name: "denmark", stats: 79 },
   { region: "europe", name: "estonia", stats: 58 },
-  { region: "europe", name: "finland", stats: 82, stats: 82 },
+  { region: "europe", name: "finland", stats: 82 },
   { region: "europe", name: "france", stats: 94 },
   { region: "europe", name: "germany", stats: 92 },
   { region: "europe", name: "greece", stats: 82 },
