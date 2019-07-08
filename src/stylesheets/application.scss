@@ -1,3 +1,10 @@
-body {
-  margin: 20px;
+@import "game";
+
+.app {
+  margin: 50px;
+  text-align: center;
+
+  h1 {
+    margin: 10px 0px;
+  }
 }

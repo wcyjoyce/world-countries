@@ -1,0 +1,19 @@
+label, button {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.game {
+  padding: 10px 0px;
+}
+
+.input {
+  padding: 10px 0px;
+}
+
+.message {
+  padding: 0px 10px;
+}
