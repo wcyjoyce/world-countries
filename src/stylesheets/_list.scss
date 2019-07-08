@@ -1,0 +1,21 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+
+  table {
+    margin-bottom: 10px;
+    padding: 10px;
+
+    th {
+      font-weight: bold;
+      text-align: center;
+      background: #DEDEDE;
+      padding: 2.5px 0px;
+    }
+
+    tr {
+      border: 1px solid #DEDEDE;
+    }
+  }
+}
