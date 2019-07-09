@@ -1,0 +1,31 @@
+.summary {
+  background: #F2EAE1;
+  width: 50%;
+  padding: 10px;
+  margin: 10px auto;
+
+  h2 {
+    margin: 10px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  button {
+    margin: 10px 0px;
+  }
+}
+
+.completed {
+  background: #C7FFDA;
+}
+
+.result {
+  font-size: 22px;
+  padding: 0px 5px;
+}
+
+#chart {
+  margin: 15px 0px;
+}
