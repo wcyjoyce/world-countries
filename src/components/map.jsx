@@ -8,6 +8,10 @@ class Map extends Component {
       hover: {
         fill: "white",
         "fill-opacity": 1
+      },
+      selected: {
+        fill: "pink",
+        "fill-opacity": 1
       }
     };
 
