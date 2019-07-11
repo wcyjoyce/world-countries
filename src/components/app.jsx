@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Game from "./game.jsx";
 import List from "./list.jsx";
+import Map from "./map.jsx";
 import countries from "./data/countries.js";
 
 class App extends Component {
@@ -58,6 +59,7 @@ class App extends Component {
           giveUp={this.giveUp}
           resetGame={this.resetGame}
         />
+        <Map countries={this.state.countries} />
         <List
           countries={this.state.countries}
           correct={this.state.correct}
