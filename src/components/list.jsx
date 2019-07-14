@@ -6,7 +6,7 @@ class List extends Component {
       return "green";
     } else {
       return this.props.time > 0 ? "white" : "red"
-    };;
+    };
   };
 
   render() {
