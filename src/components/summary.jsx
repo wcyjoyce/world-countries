@@ -37,11 +37,18 @@ class Summary extends Component {
   };
 
   renderStats = () => {
-    // placeholder data
-    var userData = [["europe", 10], ["asia", 16], ["north america", 28], ["south america", 80], ["oceania", 40], ["africa", 10]];
+    let userData = [];
+    this.props.correct.forEach(correctAnswer => {
+      userData.push(this.props.countries.find(country => country["name"] === correctAnswer));
+    });
 
-    var data = [
-      { name: "Your Score", data: userData },
+    let userScore = [];
+    stats.forEach(region => {
+      userScore.push([ region[0], userData.filter(answer => answer["region"] === region[0]).length ]);
+    });
+
+    let data = [
+      { name: "Your Score", data: userScore },
       { name: "Average", data: stats }
     ];
 
@@ -56,7 +63,7 @@ class Summary extends Component {
     } else if (this.props.time <= 0) {
       return this.renderSummary();
     } else {
-      return null
+      return null;
     };
   };
 };
