@@ -59,7 +59,7 @@ class App extends Component {
           giveUp={this.giveUp}
           resetGame={this.resetGame}
         />
-        <Map countries={this.state.countries} />
+        <Map />
         <List
           countries={this.state.countries}
           correct={this.state.correct}
