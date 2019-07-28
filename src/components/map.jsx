@@ -1,7 +1,7 @@
 import { VectorMap } from "react-jvectormap"
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-class Map extends Component {
+class Map extends PureComponent {
   render() {
     const regionStyle = {
       initial: { fill: "white" },
@@ -14,8 +14,6 @@ class Map extends Component {
         "fill-opacity": 1
       }
     };
-
-    const countrylist = this.props.countries.map(country => country.name);
 
     return (
       <div className="map">
